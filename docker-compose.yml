@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:12.20-alpine3.20
+    container_name: postgres_music_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5436:5432"
+    networks:
+      - postgres_music_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_music_network:
+    driver: bridge
